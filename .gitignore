@@ -1,2 +1,7 @@
 .vscode
 __pycache__
+
+data_outputs/
+img_outputs/
+
+test copy.ipynb
