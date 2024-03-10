@@ -51,7 +51,7 @@ python decode_huffman.py data_outputs/data img_de.bmp
 <p align="center">
   <img src="demo\yasuo.png">
 </p>
-![](demo\yasuo.png)
+
 > 只经过z字转换压缩效率大约为 `1.93`\
 > 最终经过哈夫曼编码压缩效率大约为 `7.98`
 ### demo
