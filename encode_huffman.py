@@ -11,6 +11,7 @@ from utils.matrix import Qy, Qc, Zc
 from core.dct import dct2
 from utils.cvt_color import COLOR_BGR2YCrCb, COLOR_YCrCb2BGR
 from utils.huffman import *
+from utils.txt2npz import txt2npz
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -83,7 +84,7 @@ def main(args, cfgs):
         os.makedirs(cfgs['data_output_path'])
     # np.savez(cfgs['data_output_path'] + args.data, data=dctcoef_q, dtype=np.float32)
 
-    with open(cfgs['data_output_path'] + args.data, 'w') as file:
+    with open(cfgs['data_output_path'] + args.data + '_orin.txt', 'w') as file:
         for i in range(4096):
             dctcoef_q[i] = [int(element) for element in dctcoef_q[i]]
             row_str = ' '.join(map(str, dctcoef_q[i]))
@@ -97,10 +98,14 @@ def main(args, cfgs):
         os.makedirs(cfgs['data_output_path'])
 
     # 保存Huffman编码后的数据
-    with open(cfgs['data_output_path'] + args.data, 'w') as file:
+    with open(cfgs['data_output_path'] + args.data + '_huffman.txt', 'w') as file:
         for row in encoded_dctcoef_q:
             row_str = ' '.join(map(str, row))
             file.write(row_str + '\n')
+
+    # 保存 npz    
+    txt2npz(cfgs['data_output_path'] + args.data + '_huffman.txt', cfgs['data_output_path'] + args.data + '.npz')
+
 
     # 保存Huffman字典
     with open(cfgs['data_output_path'] + 'huffman_dict.json', 'w') as file:

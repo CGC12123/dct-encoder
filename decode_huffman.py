@@ -25,10 +25,12 @@ def main(args, cfgs):
 
     # 读取编码后的数据
     encoded_dctcoef_q = []
-    with open(args.input, 'r') as file:
+    with open(args.input + '_huffman.txt', 'r') as file:
         for line in file:
             row_list = [line.strip()]
             encoded_dctcoef_q.append(row_list)
+
+    # loaded_data = np.load('output_data.npy', allow_pickle=True).astype(float)
 
     # 进行霍夫曼解码
     decoded_dctcoef_q = huffman_decode(encoded_dctcoef_q, huffman_dict)
