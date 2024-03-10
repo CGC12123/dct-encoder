@@ -2,3 +2,5 @@ numpy
 argparse
 pillow
 pyyaml
+json5
+tqdm

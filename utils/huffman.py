@@ -1,6 +1,5 @@
 import heapq
 from collections import defaultdict
-import bitarray
 from tqdm import tqdm
 
 def build_huffman_tree(symbol_freq):
