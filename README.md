@@ -15,7 +15,7 @@ python encode.py *.bmp *.txt
 ```
 e.g.
 ```bash
-python encode.py img/building.bmp data.txt
+python encode.py img/Lenna_gray.bmp data.txt
 ```
 将生成 `data.txt` 于设定的输出文件夹中（如 `data_outputs\data.txt`）
 #### 解码
@@ -34,7 +34,7 @@ python encode.py *.bmp *
 ```
 e.g.
 ```bash
-python encode_huffman.py img/building.bmp data
+python encode_huffman.py img/Lenna_gray.bmp data
 ```
 将生成 `data.txt` 于设定的输出文件夹中（如 `data_outputs\data.txt`）
 #### 解码
