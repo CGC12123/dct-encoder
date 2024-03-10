@@ -48,6 +48,9 @@ python decode_huffman.py data_outputs/data img_de.bmp
 将生成 `img_de.bmp` 于设定的输出文件夹中（如 `img_outputs\img_de.bmp`）
 ### 压缩效率
 下图从左至右分别为原图、只经过z字转换、经过哈夫曼编码并以二进制储存三者的文件大小
+<p align="center">
+  <img src="demo\yasuo.png">
+</p>
 ![](demo\yasuo.png)
 > 只经过z字转换压缩效率大约为 `1.93`\
 > 最终经过哈夫曼编码压缩效率大约为 `7.98`
