@@ -4,12 +4,13 @@ import argparse
 import numpy as np
 from numpy import r_
 import os
+import json
 
 from utils.config_reader import read_config
 from utils.matrix import Qy, Qc, Zc
 from core.dct import dct2
 from utils.cvt_color import COLOR_BGR2YCrCb, COLOR_YCrCb2BGR
-from utils.huffman import compress_with_huffman
+from utils.huffman import *
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -64,14 +65,11 @@ def main(args, cfgs):
             # 全零结尾用 a 截断
             for c in range(64-1, -1, -1):
                 if dctcoef_q[rol][c] != 0:
-                    dctcoef_q[rol][c + 1] = 'a'
-                    dctcoef_q[rol] = dctcoef_q[rol][: c + 2]
-                    # dctcoef_q[rol] = dctcoef_q[rol][: c + 1]
+                    # dctcoef_q[rol][c + 1] = 'a'
+                    # dctcoef_q[rol] = dctcoef_q[rol][: c + 2]
+                    dctcoef_q[rol] = dctcoef_q[rol][: c + 1]
                     break
 
-            flattened_data = [element for row in dctcoef_q for element in row]
-            compressed_file = cfgs['data_output_path'] + args.data + '_compressed.txt'
-            compress_with_huffman(flattened_data, compressed_file)
 
         
         # dc 编码
@@ -91,6 +89,22 @@ def main(args, cfgs):
             row_str = ' '.join(map(str, dctcoef_q[i]))
             # 将每一行写入文件
             file.write(row_str + '\n')
+
+    # 进行Huffman编码
+    encoded_dctcoef_q, huffman_dict = huffman_encode(dctcoef_q)
+
+    if not os.path.exists(cfgs['data_output_path']):
+        os.makedirs(cfgs['data_output_path'])
+
+    # 保存Huffman编码后的数据
+    with open(cfgs['data_output_path'] + args.data, 'w') as file:
+        for row in encoded_dctcoef_q:
+            row_str = ' '.join(map(str, row))
+            file.write(row_str + '\n')
+
+    # 保存Huffman字典
+    with open(cfgs['data_output_path'] + 'huffman_dict.json', 'w') as file:
+        json.dump(huffman_dict, file)
         
 if __name__ == '__main__':
     args = parse_args()
