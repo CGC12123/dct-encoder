@@ -1,0 +1,5 @@
+# 默认编码数据输出路径
+data_output_path: 'data_outputs/'
+
+# 默认解码后图像输出路径
+img_output_path: 'img_outputs/'
