@@ -36,7 +36,7 @@ e.g.
 ```bash
 python encode_huffman.py img/Lenna_gray.bmp data
 ```
-将生成 `data.txt` 于设定的输出文件夹中（如 `data_outputs\data.txt`）
+将生成 `data_orin.txt`及 `data_huffman.npy` 于设定的输出文件夹中，分别为编码后原始数据及以二进制储存的数据
 #### 解码
 ```bash
 python decode.py * *.bmp
